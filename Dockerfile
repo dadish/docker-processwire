@@ -17,6 +17,7 @@ RUN apt-get update && apt-get -y upgrade
 RUN apt-get install -y pwgen --force-yes python-setuptools curl git unzip \
     mysql-server mysql-client \
     nginx \
+    vim \
     php5-fpm php5-mysql php-apc php5-cli php5-curl php5-gd php5-mcrypt php5-intl  \
     php5-imap php5-tidy php5-imagick php5-memcache php5-xmlrpc php5-xsl
 
@@ -38,7 +39,7 @@ RUN sed -i -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" /etc/php5/fpm/php.ini
     find /etc/php5/cli/conf.d/ -name "*.ini" -exec sed -i -re 's/^(\s*)#(.*)/\1;\2/g' {} \;
 
 # ProcessWire Install
-RUN git clone git://github.com/ryancramerdesign/ProcessWire.git -b master && cd ProcessWire/ && rm -rf .git
+RUN git clone git://github.com/ryancramerdesign/ProcessWire.git -b devns && cd ProcessWire/ && rm -rf .git
 
 # Supervisor Config
 RUN easy_install supervisor
