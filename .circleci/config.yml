@@ -1,0 +1,22 @@
+version: 2.1
+
+jobs:
+  build-image:
+    machine:
+      image: ubuntu-2004:202111-02
+    steps:
+      - checkout
+      - run:
+          name: Build Image
+          command: |
+            docker build -t processwire .
+      - run:
+          name: Run Image
+          command: |
+            docker run processwire
+
+workflows:
+  version: 2
+  main:
+    jobs:
+      - build-image
